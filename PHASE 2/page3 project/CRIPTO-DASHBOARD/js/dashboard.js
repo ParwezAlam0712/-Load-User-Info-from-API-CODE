@@ -176,3 +176,22 @@ search.addEventListener("keypress", async (event) => {
 */
 loadCoin();
 renderFavorites();
+
+/*
+==================================
+DARK MODE TOGGLE
+==================================
+
+Button click hote hi
+dark-mode class add/remove hogi.
+*/
+
+themeToggle.addEventListener(
+    "click",
+    () => {
+
+        document.body
+            .classList
+            .toggle("dark-mode");
+    }
+);
