@@ -33,6 +33,23 @@ JavaScript access karegi.
 const themeToggle = document.getElementById("themeToggle");
 
 let chart;
+
+/*
+==================================
+MARKET WIDGET ELEMENTS
+==================================
+
+Top Gainers aur Top Losers
+list ko control karne ke liye.
+*/
+
+const gainersList =
+    document.getElementById("gainersList");
+
+const losersList =
+    document.getElementById("losersList");
+
+
 /*
   Coin Render Function
 */
