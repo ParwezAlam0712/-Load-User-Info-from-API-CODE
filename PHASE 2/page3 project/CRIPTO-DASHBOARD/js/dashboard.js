@@ -1,7 +1,19 @@
+/*
+==================================
+API IMPORTS
+==================================
+
+fetchCoin       -> Single coin data
+fetchHistory    -> 7 day chart data
+fetchMarketCoins-> Top gainers/losers data
+*/
+
 import {
     fetchCoin,
-    fetchHistory
+    fetchHistory,
+    fetchMarketCoins
 } from "./api.js";
+
 import { loadFavorites, saveFavorite }
     from "./utils.js";
 

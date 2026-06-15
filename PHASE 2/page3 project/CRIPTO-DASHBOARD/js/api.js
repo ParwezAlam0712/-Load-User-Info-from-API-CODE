@@ -35,3 +35,37 @@ export async function fetchHistory(
 
     return response.json();
 }
+
+/*
+==================================
+FETCH MARKET COINS
+==================================
+
+Top cryptocurrencies ka market data
+CoinGecko se fetch karega.
+
+Ye data baad me:
+
+🔥 Top Gainers
+📉 Top Losers
+
+widget banane ke liye use hoga.
+*/
+
+export async function fetchMarketCoins() {
+
+    const response = await fetch(
+
+        `${API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1`
+
+    );
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Failed to fetch market coins"
+        );
+    }
+
+    return response.json();
+}
