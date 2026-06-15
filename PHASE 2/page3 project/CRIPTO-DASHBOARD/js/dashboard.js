@@ -9,6 +9,16 @@ const results = document.getElementById("results");
 const search = document.getElementById("search");
 const favList = document.getElementById("favList");
 const loader = document.getElementById("loader");
+/*
+==================================
+DARK MODE BUTTON
+==================================
+
+Theme toggle button ko
+JavaScript access karegi.
+*/
+
+const themeToggle = document.getElementById("themeToggle");
 
 let chart;
 /*
