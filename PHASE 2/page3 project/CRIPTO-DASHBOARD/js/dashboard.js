@@ -31,6 +31,7 @@ JavaScript access karegi.
 */
 
 const themeToggle = document.getElementById("themeToggle");
+const searchResults = document.getElementById("searchResults");
 
 let chart;
 
@@ -184,6 +185,93 @@ async function renderChart(coin) {
         }
     });
 }
+
+
+/*
+==================================
+RENDER MARKET WIDGETS
+==================================
+
+Market data fetch karke
+Top Gainers aur Top Losers
+screen par dikhayega.
+*/
+
+async function renderMarketWidgets() {
+
+    try {
+
+        const coins =
+            await fetchMarketCoins();
+
+        /*
+        Top Gainers
+        */
+
+        const gainers =
+            [...coins]
+                .sort(
+                    (a, b) =>
+                        b.price_change_percentage_24h -
+                        a.price_change_percentage_24h
+                )
+                .slice(0, 5);
+
+        /*
+        Top Losers
+        */
+
+        const losers =
+            [...coins]
+                .sort(
+                    (a, b) =>
+                        a.price_change_percentage_24h -
+                        b.price_change_percentage_24h
+                )
+                .slice(0, 5);
+
+        /*
+        Render Gainers
+        */
+
+        gainersList.innerHTML =
+            gainers
+                .map(
+                    coin =>
+
+                        `<li>
+                    ${coin.name}
+                    (${coin.price_change_percentage_24h.toFixed(2)}%)
+                </li>`
+                )
+                .join("");
+
+        /*
+        Render Losers
+        */
+
+        losersList.innerHTML =
+            losers
+                .map(
+                    coin =>
+
+                        `<li>
+                    ${coin.name}
+                    (${coin.price_change_percentage_24h.toFixed(2)}%)
+                </li>`
+                )
+                .join("");
+
+    } catch (error) {
+
+        console.error(
+            "Market Widget Error",
+            error
+        );
+    }
+}
+
+
 /*
   Search Event
 */

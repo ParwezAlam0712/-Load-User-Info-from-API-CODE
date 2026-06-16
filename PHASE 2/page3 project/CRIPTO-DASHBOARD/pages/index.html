@@ -2,74 +2,213 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CryptoDash</title>
 
-  <link rel="stylesheet" href="../css/dashboard.css">
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CryptoDash Pro</title>
+
+    <!--
+    Dashboard CSS
+
+    Is file me pura dashboard
+    design hoga.
+    -->
+
+    <link rel="stylesheet"
+          href="../css/dashboard.css">
+
 </head>
 
 <body>
 
-  <main class="dashboard">
+    <!--
+    ==================================
+    SIDEBAR
+    ==================================
 
-    <h1>CryptoDash</h1>
+    Left side navigation panel.
+
+    Future:
+    Watchlist
+    Portfolio
+    News
+    Converter
+    -->
+
+    <aside class="sidebar">
+
+        <h2>🚀 CryptoDash Pro</h2>
+
+        <nav>
+
+            <ul>
+
+                <li>Dashboard</li>
+
+                <li>Watchlist</li>
+
+                <li>Portfolio</li>
+
+                <li>Markets</li>
+
+                <li>News</li>
+
+                <li>Converter</li>
+
+                <li>Settings</li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
 
     <!--
-    Dark Mode Toggle Button
+    ==================================
+    MAIN CONTENT
+    ==================================
+    -->
 
-    User is button se
-    light aur dark mode switch karega.
--->
+    <main class="main-content">
 
-    <button id="themeToggle">
-      🌙 Dark Mode
-    </button>
+        <!--
+        TOP NAVBAR
 
-    <input type="text" id="search" placeholder="Search Bitcoin, Ethereum...">
+        Search
+        Theme Toggle
+        Notifications
+        -->
 
-    <div id="loader" class="loader hidden"></div>
+        <header class="topbar">
 
-    <div id="results"></div>
+            <input
+                type="text"
+                id="search"
+                placeholder="Search Bitcoin, Ethereum..." />
+
+            <button id="themeToggle">
+
+                🌙 Dark Mode
+
+            </button>
+
+        </header>
+
+        <!--
+        ==================================
+        STATS CARDS
+        ==================================
+
+        Future:
+        Market Cap
+        Volume
+        BTC Dominance
+        -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                Market Cap
+
+            </div>
+
+            <div class="stat-card">
+
+                24h Volume
+
+            </div>
+
+            <div class="stat-card">
+
+                BTC Dominance
+
+            </div>
+
+            <div class="stat-card">
+
+                Fear & Greed
+
+            </div>
+
+        </section>
+
+        <!--
+        ==================================
+        MAIN CHART SECTION
+        ==================================
+
+        Current chart
+        yahan render hoga.
+        -->
+
+        <section class="chart-section">
+
+            <canvas id="priceChart"></canvas>
+
+        </section>
+
+        <!--
+        Coin Details
+
+        Search result
+        yahan aayega.
+        -->
+
+        <section id="results">
+
+        </section>
+
+    </main>
 
     <!--
-Top Gainers and Losers Section
+    ==================================
+    RIGHT PANEL
+    ==================================
 
-API data yahan render hoga.
--->
+    Future:
+    Top Coins
+    Top News
+    Converter
+    -->
 
-    <section id="marketWidgets">
+    <aside class="right-panel">
 
-      <div id="gainers">
+        <h3>🔥 Watchlist</h3>
 
-        <h2>🔥 Top Gainers</h2>
+        <ul id="favList"></ul>
+
+        <h3>📈 Top Movers</h3>
 
         <ul id="gainersList"></ul>
 
-      </div>
-
-      <div id="losers">
-
-        <h2>📉 Top Losers</h2>
-
         <ul id="losersList"></ul>
 
-      </div>
+    </aside>
 
-    </section>
+    <!--
+    Loader
 
-    <section id="favorites">
-      <h2>My Favorites</h2>
+    API loading spinner
+    -->
 
-      <ul id="favList"></ul>
-    </section>
+    <div id="loader"
+         class="loader hidden">
 
-    <canvas id="priceChart"></canvas>
+    </div>
 
-  </main>
+    <!--
+    Dashboard Logic
+    -->
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module" src="../js/dashboard.js"></script>
+    <script
+        type="module"
+        src="../js/dashboard.js">
+
+    </script>
 
 </body>
 
