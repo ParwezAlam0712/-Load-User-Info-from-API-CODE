@@ -69,18 +69,42 @@ const btcDominance =
 const fearGreed =
     document.getElementById("fearGreed");
 
+/*
+==================================
+PORTFOLIO ELEMENTS
+==================================
+
+ISSE KYA HOGA ?
+
+Portfolio inputs aur button ko
+JavaScript access karegi.
+*/
+
+const btcQty =
+    document.getElementById("btcQty");
+
+const ethQty =
+    document.getElementById("ethQty");
+
+const savePortfolioBtn =
+    document.getElementById("savePortfolio");
+
+const portfolioValue =
+    document.getElementById("portfolioValue");
+
 
 /*
   Coin Render Function
 */
 function renderCoin(data) {
 
+    console.log(data);
     results.innerHTML = `
         <div class="card">
 
             <h2>
                 ${data.name}
-                (${data.symbol.toUpperCase()})
+                ${data.symbol ? data.symbol.toUpperCase() : "N/A"}
             </h2>
 
             <p>
@@ -152,18 +176,37 @@ async function loadCoin(coin = "bitcoin") {
 
 function renderFavorites() {
 
-    const favorites =
-        loadFavorites();
+    const favorites = loadFavorites();
 
     favList.innerHTML =
         favorites
             .map(
                 coin =>
-                    `<li>${coin}</li>`
+                    `<li class="favorite-coin"
+                        data-coin="${coin}">
+                        ${coin}
+                    </li>`
             )
             .join("");
-}
 
+    document
+        .querySelectorAll(".favorite-coin")
+        .forEach(item => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    loadCoin(
+                        item.dataset.coin
+                    );
+
+                }
+            );
+
+        });
+
+}
 /*
 ==================================
 LIVE MARKET STATS
@@ -174,6 +217,7 @@ Market overview cards fill karega.
 
 async function renderMarketStats() {
 
+    console.log("Market Stats Running");
     try {
 
         const data =
@@ -218,6 +262,120 @@ async function renderMarketStats() {
         );
     }
 }
+
+/*
+==================================
+SAVE PORTFOLIO
+==================================
+
+ISSE KYA HOGA ?
+
+BTC aur ETH quantity
+LocalStorage me save hogi.
+*/
+
+function savePortfolio() {
+
+    const portfolio = {
+
+        btc:
+            btcQty.value || 0,
+
+        eth:
+            ethQty.value || 0
+    };
+
+    localStorage.setItem(
+        "portfolio",
+        JSON.stringify(portfolio)
+    );
+}
+
+/*
+==================================
+LOAD PORTFOLIO
+==================================
+
+ISSE KYA HOGA ?
+
+Page refresh ke baad bhi
+saved values wapas aayengi.
+*/
+
+function loadPortfolio() {
+
+    const savedPortfolio =
+        JSON.parse(
+            localStorage.getItem(
+                "portfolio"
+            )
+        );
+
+    if (!savedPortfolio) return;
+
+    btcQty.value =
+        savedPortfolio.btc;
+
+    ethQty.value =
+        savedPortfolio.eth;
+}
+
+/*
+==================================
+CALCULATE PORTFOLIO VALUE
+==================================
+
+ISSE KYA HOGA ?
+
+BTC aur ETH ki current
+market value calculate karega.
+*/
+
+async function calculatePortfolioValue() {
+
+    try {
+
+        const btcData =
+            await fetchCoin("bitcoin");
+
+        const ethData =
+            await fetchCoin("ethereum");
+
+        const btcPrice =
+            btcData.market_data
+                .current_price.usd;
+
+        const ethPrice =
+            ethData.market_data
+                .current_price.usd;
+
+        const btcValue =
+            Number(
+                btcQty.value || 0
+            ) * btcPrice;
+
+        const ethValue =
+            Number(
+                ethQty.value || 0
+            ) * ethPrice;
+
+        const total =
+            btcValue + ethValue;
+
+        portfolioValue.textContent =
+            `Total Value: $${total.toLocaleString()}`;
+
+    } catch (error) {
+
+        console.error(
+            "Portfolio Error",
+            error
+        );
+    }
+}
+
+
+
 async function renderChart(coin) {
 
     const history =
@@ -373,9 +531,9 @@ LOAD DASHBOARD DATA
 ==================================
 */
 
-renderMarketWidgets();
+//renderMarketWidgets();
 
-renderMarketStats();
+renderMarketStats(); 
 /*
 ==================================
 DARK MODE TOGGLE + SAVE
@@ -385,6 +543,13 @@ Theme change karne ke saath
 LocalStorage me bhi save karega.
 */
 
+/*
+==================================
+LOAD SAVED PORTFOLIO
+==================================
+*/
+
+calculatePortfolioValue();
 themeToggle.addEventListener(
     "click",
     () => {
@@ -431,3 +596,28 @@ if (savedTheme === "true") {
         .classList
         .add("dark-mode");
 }
+
+/*
+==================================
+SAVE + CALCULATE
+==================================
+
+ISSE KYA HOGA ?
+
+Save karte hi portfolio
+value bhi update hogi.
+*/
+
+savePortfolioBtn.addEventListener(
+    "click",
+    async () => {
+
+        savePortfolio();
+
+        await calculatePortfolioValue();
+
+        alert(
+            "Portfolio Saved Successfully"
+        );
+    }
+);

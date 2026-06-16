@@ -1,5 +1,4 @@
-const API_URL = "https://api.coingecko.com/api/v3";
-
+const API_URL ="https://api.coingecko.com/api/v3";
 /*
   Bitcoin Data Fetch
 */
