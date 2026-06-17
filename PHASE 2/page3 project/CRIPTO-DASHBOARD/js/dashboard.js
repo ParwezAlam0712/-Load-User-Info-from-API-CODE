@@ -891,3 +891,21 @@ search.addEventListener(
             });
     }
 );
+
+/*
+==================================
+AUTO REFRESH
+==================================
+*/
+
+setInterval(() => {
+
+    loadCoin();
+
+    renderMarketStats();
+
+    renderTopCoins();
+
+    renderMarketMovers();
+
+}, 60000);
