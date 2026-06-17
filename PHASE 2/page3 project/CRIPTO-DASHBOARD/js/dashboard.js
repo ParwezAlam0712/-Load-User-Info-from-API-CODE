@@ -485,50 +485,20 @@ market value calculate karega.
 
 async function calculatePortfolioValue() {
 
-    try {
+    const btcPrice = 65000;
+    const ethPrice = 1800;
 
-        const btcData =
-            await fetchCoin("bitcoin");
+    const btcValue =
+        Number(btcQty.value || 0) * btcPrice;
 
-        const ethData =
-            await fetchCoin("ethereum");
+    const ethValue =
+        Number(ethQty.value || 0) * ethPrice;
 
-        const btcPrice =
-            btcData.market_data
-                .current_price.usd;
+    const total =
+        btcValue + ethValue;
 
-        const ethPrice =
-            ethData.market_data
-                .current_price.usd;
-
-        const btcValue =
-            Number(
-                btcQty.value || 0
-            ) * btcPrice;
-
-        const ethValue =
-            Number(
-                ethQty.value || 0
-            ) * ethPrice;
-
-        const total =
-            btcValue + ethValue;
-
-        portfolioValue.textContent =
-            `Total Value: $${total.toLocaleString()}`;
-
-        renderPortfolioChart(
-            btcQty,
-            ethQty
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Portfolio Error",
-            error
-        );
-    }
+    portfolioValue.textContent =
+        `Total Value: $${total.toLocaleString()}`;
 }
 
 
@@ -942,7 +912,7 @@ setInterval(() => {
     renderTopCoins();
 
     renderMarketMovers();
-    
+
     checkAlerts();
 
 }, 60000);
@@ -984,84 +954,84 @@ notificationBtn.addEventListener(
 );
 
 const alertCoin =
-  document.getElementById("alertCoin");
+    document.getElementById("alertCoin");
 
 const alertPrice =
-  document.getElementById("alertPrice");
+    document.getElementById("alertPrice");
 
 const setAlertBtn =
-  document.getElementById("setAlertBtn");
+    document.getElementById("setAlertBtn");
 
 let alerts =
-  JSON.parse(
-    localStorage.getItem("alerts")
-  ) || [];
+    JSON.parse(
+        localStorage.getItem("alerts")
+    ) || [];
 
 setAlertBtn?.addEventListener(
-  "click",
-  () => {
+    "click",
+    () => {
 
-    const coin =
-      alertCoin.value.trim().toLowerCase();
+        const coin =
+            alertCoin.value.trim().toLowerCase();
 
-    const price =
-      Number(alertPrice.value);
+        const price =
+            Number(alertPrice.value);
 
-    if (!coin || !price) {
-      showToast("Enter coin and price");
-      return;
+        if (!coin || !price) {
+            showToast("Enter coin and price");
+            return;
+        }
+
+        alerts.push({
+            coin,
+            price
+        });
+
+        localStorage.setItem(
+            "alerts",
+            JSON.stringify(alerts)
+        );
+
+        showToast(
+            `Alert set for ${coin}`
+        );
+
+        alertCoin.value = "";
+        alertPrice.value = "";
     }
-
-    alerts.push({
-      coin,
-      price
-    });
-
-    localStorage.setItem(
-      "alerts",
-      JSON.stringify(alerts)
-    );
-
-    showToast(
-      `Alert set for ${coin}`
-    );
-
-    alertCoin.value = "";
-    alertPrice.value = "";
-  }
 );
 
 async function checkAlerts() {
 
-  const alerts =
-    JSON.parse(
-      localStorage.getItem("alerts")
-    ) || [];
+    const alerts =
+        JSON.parse(
+            localStorage.getItem("alerts")
+        ) || [];
 
-  for (const alert of alerts) {
+    for (const alert of alerts) {
 
-    try {
+        try {
 
-      const coin =
-        await fetchCoin(alert.coin);
+            const coin =
+                await fetchCoin(alert.coin);
 
-      const currentPrice =
-        coin.market_data.current_price.usd;
+            const currentPrice =
+                coin.market_data.current_price.usd;
 
-      if (
-        currentPrice >= alert.price
-      ) {
+            if (
+                currentPrice >= alert.price
+            ) {
 
-        showToast(
-          `${alert.coin} crossed $${alert.price}`
-        );
+                showToast(
+                    `${alert.coin} crossed $${alert.price}`
+                );
 
-      }
+            }
 
-    } catch (error) {
-      console.log(error);
+        } catch (error) {
+            console.log(error);
+        }
     }
-  }
 }
 checkAlerts();
 
@@ -1086,3 +1056,4 @@ function renderNews() {
         </div>
     `;
 }
+

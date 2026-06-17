@@ -30,16 +30,12 @@ look milega.
 */
 
 body {
-
     font-family: Arial, sans-serif;
-
     background: #0f172a;
-
     color: white;
-
     display: flex;
-
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /*
@@ -100,10 +96,11 @@ Dashboard ka center area.
 */
 
 .main-content {
-
     flex: 1;
-
     padding: 25px;
+
+    height: 100vh;
+    overflow-y: auto;
 }
 
 /*
@@ -146,6 +143,21 @@ ek line me aa jayenge.
 }
 
 #themeToggle {
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #38bdf8;
+
+    color: black;
+
+    cursor: pointer;
+}
+
+#notificationBtn {
 
     padding: 12px 18px;
 
@@ -250,14 +262,15 @@ right side me show honge.
 */
 
 .right-panel {
-
     width: 300px;
-
     background: #111827;
-
     padding: 25px;
-
     border-left: 1px solid #1f2937;
+
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .right-panel h3 {
@@ -598,4 +611,24 @@ Portfolio card styling.
 
 html {
     scroll-behavior: smooth;
+}
+
+#newsSection,
+#portfolioSection,
+#marketSection,
+#watchlistSection {
+    scroll-margin-top: 120px;
+}
+
+.dark-mode {
+    background: #0f172a;
+    color: white;
+}
+
+.dark-mode .sidebar {
+    background: #0b132b;
+}
+
+.dark-mode .right-panel {
+    background: #111827;
 }
