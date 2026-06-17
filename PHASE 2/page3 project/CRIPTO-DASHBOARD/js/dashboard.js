@@ -321,6 +321,14 @@ fearGreed.textContent = "72";
 marketCap.textContent = "$2 Trillion";
 volume.textContent = "$85 Billion";
 btcDominance.textContent = "56.40%";
+marketCap.classList.remove("skeleton");
+
+volume.classList.remove("skeleton");
+
+btcDominance.classList.remove("skeleton");
+
+fearGreed.classList.remove("skeleton");
+
 async function renderMarketStats() {
 
     console.log("Market Stats Running");

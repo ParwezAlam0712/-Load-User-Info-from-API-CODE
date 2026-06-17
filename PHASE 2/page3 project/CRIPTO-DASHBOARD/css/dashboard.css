@@ -396,7 +396,7 @@ Portfolio card styling.
     font-weight: bold;
 }
 
-.portfolio-box canvas{
+.portfolio-box canvas {
     width: 100% !important;
     max-width: 250px;
     height: 250px !important;
@@ -404,37 +404,37 @@ Portfolio card styling.
     display: block;
 }
 
-.top-coin{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    margin:8px 0;
-    background:#1b2940;
-    border-radius:8px;
+.top-coin {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 8px 0;
+    background: #1b2940;
+    border-radius: 8px;
 }
 
-.top-coin{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.top-coin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    padding:12px;
-    margin:10px 0;
+    padding: 12px;
+    margin: 10px 0;
 
-    background:#1b2940;
-    border-radius:10px;
+    background: #1b2940;
+    border-radius: 10px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.3s;
+    transition: .3s;
 }
 
-.top-coin:hover{
-    transform:translateY(-2px);
+.top-coin:hover {
+    transform: translateY(-2px);
 }
 
-.top-coin strong{
-    color:#4db8ff;
+.top-coin strong {
+    color: #4db8ff;
 }
 
 #searchResults {
@@ -456,27 +456,50 @@ Portfolio card styling.
     background: #2a3a56;
 }
 
-.search-results{
-  position:absolute;
-  top:60px;
-  left:0;
-  width:100%;
-  background:#1a2742;
-  border-radius:10px;
-  overflow:hidden;
-  z-index:1000;
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
+.search-results {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #1a2742;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
 }
 
-.search-item{
-  padding:10px;
-  cursor:pointer;
+.search-item {
+    padding: 10px;
+    cursor: pointer;
 }
 
-.search-item:hover{
-  background:#24365d;
+.search-item:hover {
+    background: #24365d;
 }
 
-.topbar{
-  position:relative;
+.topbar {
+    position: relative;
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            #1f2937 25%,
+            #374151 50%,
+            #1f2937 75%);
+
+    background-size: 200% 100%;
+
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+
 }
