@@ -1,4 +1,5 @@
 const topCoins = document.getElementById("topCoins");
+const toast = document.getElementById("toast");
 
 /*
 ==================================
@@ -139,9 +140,24 @@ function renderCoin(data) {
             saveFavorite(data.id);
 
             renderFavorites();
+            showToast(
+                "❤️ Added To Favorites"
+            );
         });
 }
 
+function showToast(message) {
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+}
 /*
   Load Coin
 */
@@ -418,6 +434,9 @@ function resetPortfolio() {
     if (portfolioChart) {
         portfolioChart.destroy();
     }
+    showToast(
+        "🗑 Portfolio Reset"
+    );
 }
 
 /*
@@ -753,8 +772,8 @@ savePortfolioBtn.addEventListener(
 
         await calculatePortfolioValue();
 
-        alert(
-            "Portfolio Saved Successfully"
+        showToast(
+            "✅ Portfolio Saved"
         );
     }
 );

@@ -503,3 +503,27 @@ Portfolio card styling.
     }
 
 }
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    background: #22c55e;
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    opacity: 0;
+
+    transition: 0.3s;
+
+    z-index: 9999;
+}
+
+#toast.show {
+    opacity: 1;
+}
